@@ -1,0 +1,11 @@
+{
+  "dataset_info": {
+    "total_images": 48312,
+    "total_files": 48318,
+    "creation_date": "2025-09-28T17:20:42.836467",
+    "source": "NIH Full Dataset",
+    "type": "real_nih_data",
+    "dataset_type": "full",
+    "location": "data/raw/full"
+  }
+}
