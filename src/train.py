@@ -141,10 +141,10 @@ class RxVisionTrainer:
         callbacks = [
             # Save best model
             tf.keras.callbacks.ModelCheckpoint(
-                model_dir / 'best_model.h5',
-                monitor='val_accuracy',
-                save_best_only=True
-            ),
+            str(model_dir / 'best_model.h5'),
+            monitor='val_accuracy',
+            save_best_only=True
+        ),
             # Early stopping
             tf.keras.callbacks.EarlyStopping(
                 monitor='val_accuracy',
@@ -160,7 +160,7 @@ class RxVisionTrainer:
             ),
             # Save training logs
             tf.keras.callbacks.CSVLogger(
-                model_dir / 'training_log.csv'
+                str(model_dir / 'training_log.csv')
             )
         ]
         
@@ -171,13 +171,13 @@ class RxVisionTrainer:
             epochs=epochs,
             validation_data=val_generator,
             callbacks=callbacks,
-            workers=8,
-            use_multiprocessing=True
+            #workers=1,
+            #use_multiprocessing=False
         )
         
         # Save final model and training history
-        model.save(model_dir / 'final_model.h5')
-        np.save(model_dir / 'training_history.npy', history.history)
+        model.save(str(model_dir / 'final_model.h5'))
+        np.save(str(model_dir / 'training_history.npy'), history.history)
         logger.info(f"Training completed! Models saved in {model_dir}/")
         
         return history
